@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{%block body%}
+<ul class="list-group">
+    {%for i in range(len(list))%}
+    <li class="list-group-item" style="margin-bottom: 2%" id={{i}}>{{list[i]}}
+        <button type="button" class="btn btn-danger but" id={{str(i)+"_but"}} style="margin-left: 2%">удалить</button>
+    </li>
+    {%endfor%}
+</ul>
+
+<script src="{{url_for('static', filename='js/index.js')}}">main()</script>
+{%endblock%}
