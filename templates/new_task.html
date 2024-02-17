@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{%block body%}
+<form>
+  <div class="mb-3">
+    <label for="text" class="form-label">Текст задачи</label>
+    <input type="text" class="form-control" id="text">
+  </div>
+  <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+
+<script src="{{url_for('static', filename='js/new_task.js')}}">main()</script>
+{%endblock%}

@@ -25,7 +25,25 @@ def main():
         data['main'] = list_
         with open("static\\json\\tasks.json", encoding='utf-8', mode='w') as f:
             json.dump(data, f)
-        return '{response: "nice"}'
+        return '{"response": "nice"}'
+
+    @app.route('/create', methods=['POST'])
+    def create():
+        request_data = request.get_json()
+        text = request_data['text']
+        with open("static\\json\\tasks.json", encoding='utf-8') as f:
+            data = json.load(f)
+        list_ = data['main'][:]
+        list_.append(str.strip(text))
+        data['main'] = list_
+        with open("static\\json\\tasks.json", encoding='utf-8', mode='w') as f:
+            json.dump(data, f)
+        return '{"response": "nice"}'
+
+    @app.route('/new')
+    def new():
+        return render_template('new_task.html')
+
     app.run()
 
 
