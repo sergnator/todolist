@@ -2,7 +2,25 @@ buttons = document.getElementsByClassName("but")
 console.log(buttons)
 Array.from(buttons).forEach(el =>{
     el.addEventListener('click', click)
-})  
+})
+
+// Определяем функцию которая принимает в качестве параметров url и данные которые необходимо обработать:
+const postData = async (url = '', data = {}) => {
+    // Формируем запрос
+    const response = await fetch(url, {
+      // Метод, если не указывать, будет использоваться GET
+      method: 'POST',
+     // Заголовок запроса
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // Данные
+      body: JSON.stringify(data)
+    });
+    return response.json(); 
+  }
+
+
 function click(){
     task = document.getElementById(this.id.split('_')[0])
     task.className += ' disabled'
@@ -24,8 +42,11 @@ function click(){
     btn.setAttribute('aria-label', 'Close')
     
     
-        div_alert.append(div)
+    div_alert.append(div)
     div_alert.append(btn)
     place = document.getElementById('main')
     place.append(div_alert)
+    data = {text: task.textContent.split(' ')[0]}
+    postData('/delete', data)
+    
 }
