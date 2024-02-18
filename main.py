@@ -1,6 +1,9 @@
 # pip install -r requirements.txt
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect
 import json
+import requests
+from PIL import Image
+from io import BytesIO
 
 
 def main():
@@ -44,6 +47,12 @@ def main():
     def new():
         return render_template('new_task.html')
 
+    @app.errorhandler(404)
+    def not_found_error(error):
+        data = requests.get('https://http.cat/404.jpg')
+        a = Image.open(BytesIO(data.content))
+        a.save('static/img/four.jpg')
+        return redirect(url_for('static', filename='/img/four.jpg'))
     app.run()
 
 

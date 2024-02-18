@@ -32,8 +32,7 @@ function click(){
 
     
     div = document.createElement('div')
-    div.textContent  = 'вы удалили задачу: ' + task.textContent.split(' ')[0]
-    
+    div.textContent  = 'вы удалили задачу: ' + task.textContent
     
     btn = document.createElement('button')
     btn.className = 'btn-close'
@@ -46,7 +45,7 @@ function click(){
     div_alert.append(btn)
     place = document.getElementById('main')
     place.append(div_alert)
-    data = {text: task.textContent.split(' ')[0]}
+    data = {text: task.textContent}
     postData('/delete', data)
     
 }
